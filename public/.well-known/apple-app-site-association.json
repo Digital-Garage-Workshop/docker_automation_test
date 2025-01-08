@@ -1,0 +1,25 @@
+{
+    "applinks": {
+      "apps": [],
+      "details": [
+        {
+          "appIDs": [
+              "26BLJ8M238.com.garage.digitalGarage"
+          ],
+          "paths": [
+            "*"
+          ],
+          "components": [
+            {
+              "/": "/*"
+            }
+          ]
+        }
+      ]
+    },
+    "webcredentials": {
+      "apps": [
+        "26BLJ8M238.com.garage.digitalGarage"
+      ]
+    }
+  }

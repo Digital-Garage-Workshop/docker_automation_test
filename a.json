@@ -1,0 +1,20 @@
+{
+  "web": {
+    "client_id": "41119345468-ipa075qiram2u7l1n8069c5qt0haqqen.apps.googleusercontent.com",
+    "project_id": "digital-garage-34a42",
+    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+    "token_uri": "https://oauth2.googleapis.com/token",
+    "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+    "client_secret": "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",
+    "redirect_uris": [
+      "https://digital-garage-34a42.firebaseapp.com/__/auth/handler",
+      "http://localhost:3000/api/auth/callback/google"
+    ],
+    "javascript_origins": [
+      "http://localhost",
+      "http://localhost:5000",
+      "https://digital-garage-34a42.firebaseapp.com",
+      "http://localhost:3000"
+    ]
+  }
+}

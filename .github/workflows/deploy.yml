@@ -1,0 +1,48 @@
+name: Deploy Next.js to Nginx Server
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: self-hosted
+    steps:
+      # Step 1: Checkout code
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Step 2: Setup Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+          cache: yarn
+
+      # Step 3: Install dependencies
+      - name: Install dependencies
+        run: yarn install
+
+      # Step 4: Build the Next.js application
+      - name: Build Next.js application
+        run: yarn build
+
+      # Step 5: Upload build artifact
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: nextjs-build
+          path: .next/**
+
+  deploy:
+    runs-on: self-hosted
+    needs: build
+
+    steps:
+      # Step 1: Download the build artifact
+
+      - name: Deploy and reload PM2
+        run: |
+          cd /var/www/startup/GarageEcommerce
+          pm2 restart GarageWebApi

@@ -1,0 +1,14 @@
+[
+    {
+        "relation": [
+            "delegate_permission/common.handle_all_urls"
+        ],
+        "target": {
+            "namespace": "android_app",
+            "package_name": "com.garage.digital_garage",
+            "sha256_cert_fingerprints": [
+                "D1:8D:8D:D6:DB:F7:A8:88:82:1D:D0:62:C5:4E:30:64:DE:20:36:9C:41:7B:38:4A:86:09:70:07:B4:31:F3:44"
+            ]
+        }
+    }
+]
