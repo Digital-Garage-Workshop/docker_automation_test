@@ -348,6 +348,7 @@ export const CartPage: React.FC = () => {
       return acc + (price ?? 0) * item.quantity;
     }, 0);
   }, [selectedArticles]);
+  //test
   return (
     <HStack
       gap={6}
