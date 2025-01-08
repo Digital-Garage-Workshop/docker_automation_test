@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     steps:
       # Step 1: Checkout code
       - name: Checkout code
@@ -24,25 +24,52 @@ jobs:
       - name: Install dependencies
         run: yarn install
 
-      # Step 4: Build the Next.js application
+      # Step 4: Build Next.js application
       - name: Build Next.js application
         run: yarn build
 
-      # Step 5: Upload build artifact
+      # Step 5: Archive build for deployment
+      - name: Archive build artifacts
+        run: tar -czf build.tar.gz .next public package.json yarn.lock
+
+      # Step 6: Upload build artifact
       - name: Upload build artifact
         uses: actions/upload-artifact@v3
         with:
           name: nextjs-build
-          path: .next/**
+          path: build.tar.gz
 
   deploy:
     runs-on: self-hosted
     needs: build
 
     steps:
-      # Step 1: Download the build artifact
+      # Step 1: Download build artifact
+      - name: Download build artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: nextjs-build
+          path: ./build
 
+      # Step 2: Transfer build to the server
+      - name: Transfer build artifact to server
+        uses: appleboy/scp-action@v0.1.3
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          source: ./build/build.tar.gz
+          target: /var/www/startup/GarageEcommerce/
+
+      # Step 3: SSH into the server to deploy and reload PM2
       - name: Deploy and reload PM2
-        run: |
-          cd /var/www/startup/GarageEcommerce
-          pm2 restart GarageWebApi
+        uses: appleboy/ssh-action@v0.1.5
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          script: |
+            cd /var/www/startup/GarageEcommerce
+            tar -xzf build.tar.gz
+            yarn install --production
+            pm2 restart GarageWebApi
