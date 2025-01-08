@@ -47,14 +47,32 @@ jobs:
           name: nextjs-build
           path: ./build
 
-      - name: Transfer build artifact to server
-        uses: appleboy/scp-action@v0.1.7
-        with:
-          host: ${{ secrets.SERVER_HOST }}
-          username: ${{ secrets.SERVER_USER }}
-          password: ${{ secrets.SERVER_PASSWORD }}
-          source: ./build/build.tar.gz
-          target: /var/www/startup/TestGarageEcommerce/
+      # - name: Transfer build artifact to server
+      #   uses: appleboy/scp-action@v0.1.7
+      #   with:
+      #     host: ${{ secrets.SERVER_HOST }}
+      #     username: ${{ secrets.SERVER_USER }}
+      #     password: ${{ secrets.SERVER_PASSWORD }}
+      #     source: ./build/build.tar.gz
+      #     target: /var/www/startup/TestGarageEcommerce/
+
+      # - name: Verify Build on Server
+      #   uses: appleboy/ssh-action@v0.1.5
+      #   with:
+      #     host: ${{ secrets.SERVER_HOST }}
+      #     username: ${{ secrets.SERVER_USER }}
+      #     password: ${{ secrets.SERVER_PASSWORD }}
+      #     script: |
+      #       ls -l /var/www/startup/TestGarageEcommerce/build.tar.gz
+      # - name: Verify Extracted Files
+      #   uses: appleboy/ssh-action@v0.1.5
+      #   with:
+      #     host: ${{ secrets.SERVER_HOST }}
+      #     username: ${{ secrets.SERVER_USER }}
+      #     password: ${{ secrets.SERVER_PASSWORD }}
+      #     script: |
+      #       cd /var/www/startup/TestGarageEcommerce
+      #       ls -l
 
       - name: Deploy and reload PM2
         uses: appleboy/ssh-action@v0.1.5
@@ -63,7 +81,8 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           password: ${{ secrets.SERVER_PASSWORD }}
           script: |
-            cd /var/www/startup/TestGarageEcommerce
+            cd /var/www/startup/TestGarageEcommerces
             tar -xzf build.tar.gz
             yarn install --production
+            yarn build
             pm2 restart TestGarageWebApi
