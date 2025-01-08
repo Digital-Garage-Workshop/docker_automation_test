@@ -81,7 +81,7 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           password: ${{ secrets.SERVER_PASSWORD }}
           script: |
-            cd /var/www/startup/TestGarageEcommerces
+            cd /var/www/startup/TestGarageEcommerce
             tar -xzf build.tar.gz
             yarn install --production
             yarn build
