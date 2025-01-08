@@ -101,7 +101,7 @@ export default async function Home() {
           <CarBrands data={carbrands} />
           <Accessories data={partsbrand} />
           <Banner />
-          <Faq data={faq} />
+          {/* <Faq data={faq} /> */}
         </VStack>
         <AppInstaller />
       </Stack>
