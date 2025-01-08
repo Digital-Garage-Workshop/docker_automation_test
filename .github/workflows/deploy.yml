@@ -9,33 +9,27 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      # Step 1: Checkout code
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # Step 2: Setup Node.js
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: "18"
           cache: yarn
 
-      # Step 3: Install dependencies
       - name: Install dependencies
         run: yarn
 
       - name: Create .env file
         run: echo "${{ secrets.ENV_FILE }}" > .env
 
-      # Step 4: Build Next.js application
       - name: Build Next.js application
         run: yarn build
 
-      # Step 5: Archive build for deployment
       - name: Archive build artifacts
         run: tar -czf build.tar.gz .next public package.json yarn.lock
 
-      # Step 6: Upload build artifact
       - name: Upload build artifact
         uses: actions/upload-artifact@v3
         with:
@@ -47,16 +41,14 @@ jobs:
     needs: build
 
     steps:
-      # Step 1: Download build artifact
       - name: Download build artifact
         uses: actions/download-artifact@v3
         with:
           name: nextjs-build
           path: ./build
 
-      # Step 2: Transfer build to the server
       - name: Transfer build artifact to server
-        uses: appleboy/scp-action@v0.1.3
+        uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_USER }}
@@ -64,7 +56,6 @@ jobs:
           source: ./build/build.tar.gz
           target: /var/www/startup/TestGarageEcommerce/
 
-      # Step 3: SSH into the server to deploy and reload PM2
       - name: Deploy and reload PM2
         uses: appleboy/ssh-action@v0.1.5
         with:
@@ -75,4 +66,4 @@ jobs:
             cd /var/www/startup/TestGarageEcommerce
             tar -xzf build.tar.gz
             yarn install --production
-            pm2 restart GarageWebApi
+            pm2 restart TestGarageWebApi
