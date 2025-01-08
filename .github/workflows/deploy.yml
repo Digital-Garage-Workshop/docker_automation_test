@@ -22,7 +22,7 @@ jobs:
 
       # Step 3: Install dependencies
       - name: Install dependencies
-        run: yarn install
+        run: yarn
 
       # Step 4: Build Next.js application
       - name: Build Next.js application
