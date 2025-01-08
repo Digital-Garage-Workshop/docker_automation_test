@@ -24,6 +24,9 @@ jobs:
       - name: Install dependencies
         run: yarn
 
+      - name: Create .env file
+        run: echo "${{ secrets.ENV_FILE }}" > .env
+
       # Step 4: Build Next.js application
       - name: Build Next.js application
         run: yarn build
