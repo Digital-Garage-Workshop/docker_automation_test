@@ -62,7 +62,7 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
           source: ./build/build.tar.gz
-          target: /var/www/startup/GarageEcommerce/
+          target: /var/www/startup/TestGarageEcommerce/
 
       # Step 3: SSH into the server to deploy and reload PM2
       - name: Deploy and reload PM2
@@ -72,7 +72,7 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
-            cd /var/www/startup/GarageEcommerce
+            cd /var/www/startup/TestGarageEcommerce
             tar -xzf build.tar.gz
             yarn install --production
             pm2 restart GarageWebApi
