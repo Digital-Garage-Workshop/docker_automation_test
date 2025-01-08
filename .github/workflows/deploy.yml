@@ -82,7 +82,7 @@ jobs:
           password: ${{ secrets.SERVER_PASSWORD }}
           script: |
             cd /var/www/startup/TestGarageEcommerce
-            tar -xzf build.tar.gz
-            yarn install --production
+            git pull origin main
+            yarn 
             yarn build
             pm2 restart TestGarageWebApi
