@@ -76,7 +76,10 @@ export default async function Home() {
           p={0}
           pb={{ base: 10, md: 20 }}
         >
-          <CarSelection isShow={false} isInMain={true} />
+          <CarSelection
+            // isShow={false}
+            isInMain={true}
+          />
 
           <VStack
             w="100vw"
@@ -101,7 +104,7 @@ export default async function Home() {
           <CarBrands data={carbrands} />
           <Accessories data={partsbrand} />
           <Banner />
-          <Faq data={faq} />
+          {/* <Faq data={faq} /> */}
         </VStack>
         <AppInstaller />
       </Stack>

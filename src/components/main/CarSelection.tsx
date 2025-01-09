@@ -207,8 +207,8 @@ export const CarSelection = (props: CarSelectionProps) => {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     const uppercaseValue = value.toUpperCase();
-    setFieldValue(name, uppercaseValue); // Update Formik value
-    validatePlate(uppercaseValue); // Validate format
+    setFieldValue(name, uppercaseValue);
+    validatePlate(uppercaseValue);
   };
 
   const refresh = () => {
@@ -218,9 +218,7 @@ export const CarSelection = (props: CarSelectionProps) => {
 
   return (
     <Collapse
-      in={
-        isShow != null ? true : false || carDetails.isCarCompShow ? true : false
-      }
+      in={isInMain != null ? true : carDetails.isCarCompShow ? true : false}
       ref={ref}
     >
       <Alert isRow={true} />

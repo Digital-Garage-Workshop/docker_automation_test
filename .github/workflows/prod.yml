@@ -1,9 +1,9 @@
-name: front.
+name: web.
 
 on:
   push:
-    branches: ["dev"]
-  workflow_dispatch:
+    tags:
+      - "version*"
 
 jobs:
   build:
@@ -54,8 +54,8 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           password: ${{ secrets.SERVER_PASSWORD }}
           script: |
-            cd /var/www/startup/TestGarageEcommerce
+            cd /var/www/startup/GarageEcommerce
             git pull origin main
             yarn 
             yarn build
-            pm2 restart TestGarageWebApi
+            pm2 restart GarageWebApi
