@@ -1,4 +1,4 @@
-name: Deploy Next.js to Nginx Server
+name: front.
 
 on:
   push:
