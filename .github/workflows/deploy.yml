@@ -55,7 +55,7 @@ jobs:
           password: ${{ secrets.SERVER_PASSWORD }}
           script: |
             cd /var/www/startup/TestGarageEcommerce
-            git pull origin dev
+            git pull origin main
             yarn 
             yarn build
             pm2 restart TestGarageWebApi
