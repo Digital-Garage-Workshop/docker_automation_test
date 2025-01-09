@@ -94,9 +94,9 @@ export default async function Home() {
               gap={{ base: "40px", md: "80px" }}
               p={0}
             >
-              <Carousel banners={banners} />
+              {/* <Carousel banners={banners} />
               <CatalogTest />
-              <RecentlyViewed />
+              <RecentlyViewed /> */}
             </VStack>
           </VStack>
           {/* <Service /> */}
