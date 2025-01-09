@@ -2,8 +2,8 @@ name: web.
 
 on:
   push:
-    tag:
-      - "v*"
+    tags:
+      - "version*"
 
 jobs:
   build:
